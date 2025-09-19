@@ -28,7 +28,7 @@ class ScreenRelated:
         self.message_text_bar_pos = pyautogui.position()
 
     def type_sentence_to_screen(self, msg):
-        y_offset: int = 40 # should really not be using magic numbers and instead should be like slowly incrementing clicks upwards until reach the new button locationm but for now it works
+        y_offset: int = 41 # should really not be using magic numbers and instead should be like slowly incrementing clicks upwards until reach the new button locationm but for now it works
         lo_message = list(msg)
         first = True
         for i in lo_message:
@@ -42,17 +42,21 @@ class ScreenRelated:
                     first = False
                     time.sleep(.5)   
             else:
+                print(self.is_reaction)
                 if self.is_reaction:
                     # idk maybe do something with this later
                     pass
                 else:
                     new_message = i # technically keeping it i is more efficient (slightly) but I want to keep a standardisation between the if statemetn
-                    self.type_letter_to_screen(i)
+                    self.type_letter_to_screen(new_message)
                     pyautogui.press('enter')
+        if not self.is_reaction:
+            pyautogui.press('enter')
         
     def type_letter_to_screen(self, msg, first: bool = False):
         if self.is_reaction:
             pyautogui.moveTo(self.reaction_plus_icon_pos)
+            time.sleep(.75)
             pyautogui.click()
             if first:
                 pyautogui.click()
