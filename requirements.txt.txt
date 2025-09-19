@@ -1,5 +1,2 @@
 pyautogui
-pynput
-opencv-python
-numpy
-Pillow
+keyboard
