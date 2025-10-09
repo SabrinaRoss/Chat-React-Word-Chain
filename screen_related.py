@@ -23,10 +23,15 @@ class ScreenRelated:
         for software in Software:
             print(f'Application: {software.name}, pleases type {software.value} to use')
         temp = input("\nType your desired software here: ")
-        if temp in Software.__members__.values():
-            self.software = temp
-        else:
-            self.grab_software_using(self) # yes I am aware this could stack overflow
+        print(Software.__members__.values())
+        if temp.isdigit():
+            temp = int(temp)
+            if temp in [s.value for s in Software]:
+                self.software = Software(temp)
+                print(f'You selected: {self.software}')
+            print(temp)
+            return 
+        self.grab_software_using() # yes I am aware this could stack overflow
 
     def grab_reaction_text_bar_pos(self):
         print("Press shift over the Reaction Text Bar to grab it's location on the screen")
